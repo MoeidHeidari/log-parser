@@ -1,7 +1,7 @@
-import { Module } from '@nestjs/common'
-import { ParserCommand } from './command/parser.command'
-import { FileHelper } from './helper'
-import { ParserService } from './service/parser.service'
+import { Module } from '@nestjs/common';
+import { ParserCommand } from './command/parser.command';
+import { FileHelper } from './helper';
+import { ParserService } from './service/parser.service';
 
 /**
  * Parser module
