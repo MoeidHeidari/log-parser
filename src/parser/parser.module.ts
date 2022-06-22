@@ -1,11 +1,20 @@
-import { Module } from '@nestjs/common';
-import { CommandModule } from 'nestjs-command';
-import { ParserCommand } from './command/parser.command';
-import { ParserService } from './service/parser.service';
+import { Module } from '@nestjs/common'
+import { ParserCommand } from './command/parser.command'
+import { FileHelper } from './helper'
+import { ParserService } from './service/parser.service'
 
-
+/**
+ * Parser module
+ */
 @Module({
   imports: [],
-  providers: [ParserCommand, ParserService]
+  providers: [
+    ParserCommand,
+    ParserService,
+    {
+      provide: 'FILE_HELPER',
+      useClass: FileHelper,
+    },
+  ],
 })
 export class ParserModule {}

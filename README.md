@@ -1,73 +1,192 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# MAYD Log parser
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# Table of Contents
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+- [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Provided Commands](#provided-commands)
+  - [Code architecture](#code-architecture)
+  - [source code](#source-code)
+  - [Service build information](#service-build-information)
+  - [Regular user](#regular-user)
+  - [Documentation](#documentation)
+  - [Example](#example)
+  - [ToDo list](#todo-list)
+    
+    ## Overview
+    
+    Log parser takes a log input file and tries to parse it to extract useful information. It also respects [General Data Protection Regulation (GDPR)](https://gdpr-info.eu/)
+    
+    You can see take a look  at the Full documentation [here](https://github.com/MoeidHeidari/log-parser/blob/main/full-documentation.md)
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
+#### Provided Commands
 
 ```bash
-$ npm install
+cli
+
+parses a log file
+
+Options:
+  -h, --help       Show help                                           [boolean]
+  -l, --log-level  log-level (ex: "error,[error,debug,warn,info]")
+                                                     [string] [default: "error"]
+  -o, --output     output log file (ex: "output.log")
+                                     [string] [required] [default: "output.log"]
+  -i, --input      input log file (ex: "input.log")          [string] [required]
+  -v, --version    Show version number                                 [boolean]
 ```
 
-## Running the app
+---
+
+## Code architecture
+
+Onion Architecture
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+src
+├── app
+└── parser
+    ├── command
+    ├── common
+    ├── dtos
+    ├── enum
+    ├── helper
+    ├── model
+    └── service
 ```
 
-## Test
+---
+
+## source code
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+git clone https://github.com/MoeidHeidari/log-parser.git
+cd log-parser
 ```
 
-## Support
+## Service build information
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### Regular user
 
-## Stay in touch
+```bash
+npm install
+npm run build
+npm run test
+npm start:{dev || debug || prod}
+```
+test result
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```bash
+PASS  test/unit-tests/utils.spec.ts
+PASS  test/unit-tests/filehelper.spec.ts
+PASS  test/unit-tests/parser.service.spec.ts (5.093 s)
+PASS  test/integration-tests/parser-command.spec.ts (5.418 s)
+Test Suites: 4 passed, 4 total
+Tests:       33 passed, 33 total
+Snapshots:   0 total
+Time:        5.732 s, estimated 6 s
+Ran all test suites.
+```
 
-## License
+## Documentation
 
-Nest is [MIT licensed](LICENSE).
+By running following comman you can generate the full code documentation (Compodoc) and get access to it through port `7000`
+
+```bash
+npm run doc
+```
+
+http://localhost:7000
+
+## Example
+
+input.log
+
+```textile
+2044-08-09T02:12:51.253Z - info - {"transactionId":"9abc55b2-807b-4361-9dbe-aa88b1b2e978","details":"Service is started"}
+2021-08-09T02:12:51.254Z - debug - {"transactionId":"9abc55b2-807b-4361-9dbe-aa88b1b2e978","details":"About to request the user information","userId": 10}
+2021-08-09T02:12:51.254Z - debug - {"transactionId":"9abc55b2-807b-4361-9dbe-aa88b1b2e978","details":"About to request user orders list","userId": 10}
+2021-08-09T02:12:51.255Z - info - {"transactionId":"9abc55b2-807b-4361-9dbe-aa88b1b2e821","details":"Service is started"}
+2021-08-09T02:12:51.257Z - debug - {"transactionId":"9abc55b2-807b-4361-9dbe-aa88b1b2e821","details":"About to request the user information","userId": 16}
+2021-08-09T02:12:51.257Z - debug - {"transactionId":"9abc55b2-807b-4361-9dbe-aa88b1b2e978","details":"User information is gathered","user":{"id":10,"name":"Alice"}}
+2021-08-09T02:12:51.258Z - debug - {"transactionId":"9abc55b2-807b-4361-9dbe-aa88b1b2e821","details":"About to request user orders list","userId":16}
+2021-08-09T02:12:51.259Z - error - {"transactionId":"9abc55b2-807b-4361-9dbe-aa88b1b2e978","details":"Cannot find user orders list","code": 404,"err":"Not found"}
+2021-08-09T02:12:51.259Z - debug - {"transactionId":"9abc55b2-807b-4361-9dbe-aa88b1b2e821","details":"User information is retrieved","user": {"id": 16, "name": "Michael"}}
+2021-08-09T02:12:51.262Z - debug - {"transactionId":"9abc55b2-807b-4361-9dbe-aa88b1b2e821","details":"User information is retrieved","user":{"id":16,"orders":[{"id":472,"items":{"id":7,"price":7.12}}]}}
+2021-08-09T02:12:51.264Z - warn - {"transactionId":"9abc55b2-807b-4361-9dbe-aa88b1b2e978","details":"Service finished with error","code":404,"err":"Cannot find user orders list"}
+2021-08-09T02:12:51.265Z - info - {"transactionId":"9abc55b2-807b-4361-9dbe-aa88b1b2e821","details":"Service is successfully finished"}
+```
+
+Run Log parser
+
+```bash
+npm run build
+node dist/cli.js --input input.log --output log.json --log-level error,debug
+Success 😀. output is written in log.json
+```
+
+output.json
+
+```json
+[
+  {
+    "timestamp": 1628475171254,
+    "logLevel": "debug",
+    "transactionId": "9abc55b2-807b-4361-9dbe-aa88b1b2e978",
+    "err": "About to request the user information"
+  },
+  {
+    "timestamp": 1628475171254,
+    "logLevel": "debug",
+    "transactionId": "9abc55b2-807b-4361-9dbe-aa88b1b2e978",
+    "err": "About to request user orders list"
+  },
+  {
+    "timestamp": 1628475171257,
+    "logLevel": "debug",
+    "transactionId": "9abc55b2-807b-4361-9dbe-aa88b1b2e821",
+    "err": "About to request the user information"
+  },
+  {
+    "timestamp": 1628475171257,
+    "logLevel": "debug",
+    "transactionId": "9abc55b2-807b-4361-9dbe-aa88b1b2e978",
+    "err": "User information is gathered"
+  },
+  {
+    "timestamp": 1628475171258,
+    "logLevel": "debug",
+    "transactionId": "9abc55b2-807b-4361-9dbe-aa88b1b2e821",
+    "err": "About to request user orders list"
+  },
+  {
+    "timestamp": 1628475171259,
+    "logLevel": "error",
+    "transactionId": "9abc55b2-807b-4361-9dbe-aa88b1b2e978",
+    "err": "Cannot find user orders list"
+  },
+  {
+    "timestamp": 1628475171259,
+    "logLevel": "debug",
+    "transactionId": "9abc55b2-807b-4361-9dbe-aa88b1b2e821",
+    "err": "User information is retrieved"
+  },
+  {
+    "timestamp": 1628475171262,
+    "logLevel": "debug",
+    "transactionId": "9abc55b2-807b-4361-9dbe-aa88b1b2e821",
+    "err": "User information is retrieved"
+  }
+]
+```
+
+## ToDo list
+
+- [ ] connect it to logstash
+- [ ] implement elastic search
+
+## 
+
+
