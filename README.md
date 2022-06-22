@@ -76,6 +76,19 @@ npm run build
 npm run test
 npm start:{dev || debug || prod}
 ```
+test result
+
+```bash
+PASS  test/unit-tests/utils.spec.ts
+PASS  test/unit-tests/filehelper.spec.ts
+PASS  test/unit-tests/parser.service.spec.ts (5.093 s)
+PASS  test/integration-tests/parser-command.spec.ts (5.418 s)
+Test Suites: 4 passed, 4 total
+Tests:       33 passed, 33 total
+Snapshots:   0 total
+Time:        5.732 s, estimated 6 s
+Ran all test suites.
+```
 
 ## Documentation
 
