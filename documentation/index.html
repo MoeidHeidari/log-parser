@@ -1,0 +1,241 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>parser documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	   <link rel="stylesheet" href="./styles/style.css">
+        <link rel="stylesheet" href="./styles/dark.css">
+        <link rel="stylesheet" href="./styles/Stripe.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="./" class="navbar-brand">parser documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content getting-started">
+                   <div class="content-data">
+
+<h1 id="mayd-log-parser">MAYD Log parser</h1>
+<h1 id="table-of-contents">Table of Contents</h1>
+<ul>
+<li><a href="#table-of-contents">Table of Contents</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#provided-commands">Provided Commands</a></li>
+<li><a href="#code-architecture">Code architecture</a></li>
+<li><a href="#source-code">source code</a></li>
+<li><a href="#service-build-information">Service build information</a></li>
+<li><a href="#regular-user">Regular user</a></li>
+<li><a href="#documentation">Documentation</a></li>
+<li><a href="#example">Example</a></li>
+<li><a href="#todo-list">ToDo list</a></li>
+</ul>
+<h2 id="overview">Overview</h2>
+<p>  Log parser takes a log input file and tries to parse it to extract useful information. It also respects <a href="https://gdpr-info.eu/">General Data Protection Regulation (GDPR)</a></p>
+<p>  You can see take a look  at the Full documentation <a href="https://github.com/MoeidHeidari/log-parser/blob/main/full-documentation.md">here</a></p>
+</li>
+</ul>
+<hr>
+<h4 id="provided-commands">Provided Commands</h4>
+<div><pre class="line-numbers"><code class="language-bash">cli
+
+parses a log file
+
+Options:
+  -h, --help       Show help                                           [boolean]
+  -l, --log-level  log-level (ex: &quot;error,[error,debug,warn,info]&quot;)
+                                                     [string] [default: &quot;error&quot;]
+  -o, --output     output log file (ex: &quot;output.log&quot;)
+                                     [string] [required] [default: &quot;output.log&quot;]
+  -i, --input      input log file (ex: &quot;input.log&quot;)          [string] [required]
+  -v, --version    Show version number                                 [boolean]</code></pre></div><hr>
+<h2 id="code-architecture">Code architecture</h2>
+<p>Onion Architecture</p>
+<div><pre class="line-numbers"><code class="language-bash">src
+├── app
+└── parser
+    ├── command
+    ├── common
+    ├── dtos
+    ├── enum
+    ├── helper
+    ├── model
+    └── service</code></pre></div><hr>
+<h2 id="source-code">source code</h2>
+<div><pre class="line-numbers"><code class="language-bash">git clone https://github.com/MoeidHeidari/log-parser.git
+cd log-parser</code></pre></div><h2 id="service-build-information">Service build information</h2>
+<h3 id="regular-user">Regular user</h3>
+<div><pre class="line-numbers"><code class="language-bash">npm install
+npm run build
+npm run test
+npm start:{dev || debug || prod}</code></pre></div><h2 id="documentation">Documentation</h2>
+<p>By running following comman you can generate the full code documentation (Compodoc) and get access to it through port <code>7000</code></p>
+<div><pre class="line-numbers"><code class="language-bash">npm run doc</code></pre></div><p><a href="http://localhost:7000">http://localhost:7000</a></p>
+<h2 id="example">Example</h2>
+<p>input.log</p>
+<div><pre class="line-numbers"><code class="language-textile">2044-08-09T02:12:51.253Z - info - {&quot;transactionId&quot;:&quot;9abc55b2-807b-4361-9dbe-aa88b1b2e978&quot;,&quot;details&quot;:&quot;Service is started&quot;}
+2021-08-09T02:12:51.254Z - debug - {&quot;transactionId&quot;:&quot;9abc55b2-807b-4361-9dbe-aa88b1b2e978&quot;,&quot;details&quot;:&quot;About to request the user information&quot;,&quot;userId&quot;: 10}
+2021-08-09T02:12:51.254Z - debug - {&quot;transactionId&quot;:&quot;9abc55b2-807b-4361-9dbe-aa88b1b2e978&quot;,&quot;details&quot;:&quot;About to request user orders list&quot;,&quot;userId&quot;: 10}
+2021-08-09T02:12:51.255Z - info - {&quot;transactionId&quot;:&quot;9abc55b2-807b-4361-9dbe-aa88b1b2e821&quot;,&quot;details&quot;:&quot;Service is started&quot;}
+2021-08-09T02:12:51.257Z - debug - {&quot;transactionId&quot;:&quot;9abc55b2-807b-4361-9dbe-aa88b1b2e821&quot;,&quot;details&quot;:&quot;About to request the user information&quot;,&quot;userId&quot;: 16}
+2021-08-09T02:12:51.257Z - debug - {&quot;transactionId&quot;:&quot;9abc55b2-807b-4361-9dbe-aa88b1b2e978&quot;,&quot;details&quot;:&quot;User information is gathered&quot;,&quot;user&quot;:{&quot;id&quot;:10,&quot;name&quot;:&quot;Alice&quot;}}
+2021-08-09T02:12:51.258Z - debug - {&quot;transactionId&quot;:&quot;9abc55b2-807b-4361-9dbe-aa88b1b2e821&quot;,&quot;details&quot;:&quot;About to request user orders list&quot;,&quot;userId&quot;:16}
+2021-08-09T02:12:51.259Z - error - {&quot;transactionId&quot;:&quot;9abc55b2-807b-4361-9dbe-aa88b1b2e978&quot;,&quot;details&quot;:&quot;Cannot find user orders list&quot;,&quot;code&quot;: 404,&quot;err&quot;:&quot;Not found&quot;}
+2021-08-09T02:12:51.259Z - debug - {&quot;transactionId&quot;:&quot;9abc55b2-807b-4361-9dbe-aa88b1b2e821&quot;,&quot;details&quot;:&quot;User information is retrieved&quot;,&quot;user&quot;: {&quot;id&quot;: 16, &quot;name&quot;: &quot;Michael&quot;}}
+2021-08-09T02:12:51.262Z - debug - {&quot;transactionId&quot;:&quot;9abc55b2-807b-4361-9dbe-aa88b1b2e821&quot;,&quot;details&quot;:&quot;User information is retrieved&quot;,&quot;user&quot;:{&quot;id&quot;:16,&quot;orders&quot;:[{&quot;id&quot;:472,&quot;items&quot;:{&quot;id&quot;:7,&quot;price&quot;:7.12}}]}}
+2021-08-09T02:12:51.264Z - warn - {&quot;transactionId&quot;:&quot;9abc55b2-807b-4361-9dbe-aa88b1b2e978&quot;,&quot;details&quot;:&quot;Service finished with error&quot;,&quot;code&quot;:404,&quot;err&quot;:&quot;Cannot find user orders list&quot;}
+2021-08-09T02:12:51.265Z - info - {&quot;transactionId&quot;:&quot;9abc55b2-807b-4361-9dbe-aa88b1b2e821&quot;,&quot;details&quot;:&quot;Service is successfully finished&quot;}</code></pre></div><p>Run Log parser</p>
+<div><pre class="line-numbers"><code class="language-bash">npm run build
+node dist/cli.js --input input.log --output log.json --log-level error,debug
+Success 😀. output is written in log.json</code></pre></div><p>output.json</p>
+<div><pre class="line-numbers"><code class="language-json">[
+  {
+    &quot;timestamp&quot;: 1628475171254,
+    &quot;logLevel&quot;: &quot;debug&quot;,
+    &quot;transactionId&quot;: &quot;9abc55b2-807b-4361-9dbe-aa88b1b2e978&quot;,
+    &quot;err&quot;: &quot;About to request the user information&quot;
+  },
+  {
+    &quot;timestamp&quot;: 1628475171254,
+    &quot;logLevel&quot;: &quot;debug&quot;,
+    &quot;transactionId&quot;: &quot;9abc55b2-807b-4361-9dbe-aa88b1b2e978&quot;,
+    &quot;err&quot;: &quot;About to request user orders list&quot;
+  },
+  {
+    &quot;timestamp&quot;: 1628475171257,
+    &quot;logLevel&quot;: &quot;debug&quot;,
+    &quot;transactionId&quot;: &quot;9abc55b2-807b-4361-9dbe-aa88b1b2e821&quot;,
+    &quot;err&quot;: &quot;About to request the user information&quot;
+  },
+  {
+    &quot;timestamp&quot;: 1628475171257,
+    &quot;logLevel&quot;: &quot;debug&quot;,
+    &quot;transactionId&quot;: &quot;9abc55b2-807b-4361-9dbe-aa88b1b2e978&quot;,
+    &quot;err&quot;: &quot;User information is gathered&quot;
+  },
+  {
+    &quot;timestamp&quot;: 1628475171258,
+    &quot;logLevel&quot;: &quot;debug&quot;,
+    &quot;transactionId&quot;: &quot;9abc55b2-807b-4361-9dbe-aa88b1b2e821&quot;,
+    &quot;err&quot;: &quot;About to request user orders list&quot;
+  },
+  {
+    &quot;timestamp&quot;: 1628475171259,
+    &quot;logLevel&quot;: &quot;error&quot;,
+    &quot;transactionId&quot;: &quot;9abc55b2-807b-4361-9dbe-aa88b1b2e978&quot;,
+    &quot;err&quot;: &quot;Cannot find user orders list&quot;
+  },
+  {
+    &quot;timestamp&quot;: 1628475171259,
+    &quot;logLevel&quot;: &quot;debug&quot;,
+    &quot;transactionId&quot;: &quot;9abc55b2-807b-4361-9dbe-aa88b1b2e821&quot;,
+    &quot;err&quot;: &quot;User information is retrieved&quot;
+  },
+  {
+    &quot;timestamp&quot;: 1628475171262,
+    &quot;logLevel&quot;: &quot;debug&quot;,
+    &quot;transactionId&quot;: &quot;9abc55b2-807b-4361-9dbe-aa88b1b2e821&quot;,
+    &quot;err&quot;: &quot;User information is retrieved&quot;
+  }
+]</code></pre></div><h2 id="todo-list">ToDo list</h2>
+<ul>
+<li><input disabled="" type="checkbox"> connect it to logstash</li>
+<li><input disabled="" type="checkbox"> implement elastic search</li>
+</ul>
+<h2 id=""></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
+            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+
+       <script src="./js/menu-wc.js" defer></script>
+       <script nomodule src="./js/menu-wc_es5.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+       <script src="./js/libs/zepto.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
