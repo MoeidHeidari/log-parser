@@ -1,19 +1,19 @@
-import { Command, Positional, Option } from 'nestjs-command'
-import { Injectable } from '@nestjs/common'
-import { ParserService } from '../service/parser.service'
-import { ParserCommandDTO } from '../dtos/parser-command-dto'
-import { validateDTO } from '../common'
+import { Command, Option } from 'nestjs-command';
+import { Injectable } from '@nestjs/common';
+import { ParserService } from '../service/parser.service';
+import { ParserCommandDTO } from '../dtos/parser-command-dto';
+import { validateDTO } from '../common';
 
 /**
  * Log parser command
  */
 @Injectable()
 export class ParserCommand {
-    /**
-     * Constructs the Log parser command class
-     * @param parserService Injection of parser service
-     */
-  constructor (private readonly parserService: ParserService) {}
+  /**
+   * Constructs the Log parser command class
+   * @param parserService Injection of parser service
+   */
+  constructor(private readonly parserService: ParserService) {}
 
   /**
    * Parser command that takes the input log file, parses and writes the result to the output file as ajson content.
@@ -26,7 +26,7 @@ export class ParserCommand {
     command: '*',
     describe: 'parses a log file',
   })
-  async parse (
+  async parse(
     @Option({
       name: 'input',
       describe: 'input log file (ex: "input.log")',
@@ -55,23 +55,23 @@ export class ParserCommand {
     log_level: string,
   ) {
     try {
-      let logFilter = log_level.split(',')
-      let command = new ParserCommandDTO({
+      const logFilter = log_level.split(',');
+      const command = new ParserCommandDTO({
         input: input,
         output: output,
         logLevel: logFilter,
-      })
-      await validateDTO(command)
+      });
+      await validateDTO(command);
       return this.parserService
         .parse(command)
         .then(() => {
-         console.log(`Success 😀. output is written in ${output}`)
+          console.log(`Success 😀. output is written in ${output}`);
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
-        })
+        });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 }

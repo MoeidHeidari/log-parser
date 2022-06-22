@@ -3,21 +3,31 @@
 # Table of Contents
 
 - [Table of Contents](#table-of-contents)
+  
   - [Overview](#overview)
+    
   - [Provided Commands](#provided-commands)
+    
   - [Code architecture](#code-architecture)
+    
   - [source code](#source-code)
+    
   - [Service build information](#service-build-information)
+    
   - [Regular user](#regular-user)
+    
   - [Documentation](#documentation)
+    
   - [Example](#example)
+    
   - [ToDo list](#todo-list)
     
     ## Overview
     
     Log parser takes a log input file and tries to parse it to extract useful information. It also respects [General Data Protection Regulation (GDPR)](https://gdpr-info.eu/)
     
-    You can see take a look  at the Full documentation [here](https://github.com/MoeidHeidari/log-parser/blob/main/full-documentation.md)
+    You can see take a look at the Full documentation [here](https://github.com/MoeidHeidari/log-parser/blob/main/full-documentation.md)
+    
 
 ---
 
@@ -74,8 +84,20 @@ cd log-parser
 npm install
 npm run build
 npm run test
+npm run lint
 npm start:{dev || debug || prod}
 ```
+
+### using runner.sh
+
+```bash
+bash scripts/runner.sh
+...
+Done! 😍
+now you can use the application by following commmand
+node dist/cli.js -h
+```
+
 test result
 
 ```bash
@@ -123,8 +145,7 @@ Run Log parser
 
 ```bash
 npm run build
-node dist/cli.js --input input.log --output log.json --log-level error,debug
-Success 😀. output is written in log.json
+ode dist/cli.js --input input.log --output log.json --log-level error,debug
 ```
 
 output.json
@@ -187,6 +208,4 @@ output.json
 - [ ] connect it to logstash
 - [ ] implement elastic search
 
-## 
-
-
+##

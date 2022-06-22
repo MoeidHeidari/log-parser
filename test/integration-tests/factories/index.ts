@@ -1,1 +1,1 @@
-export * from './parser-command.factory'
+export * from './parser-command.factory';
