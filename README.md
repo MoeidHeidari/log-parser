@@ -1,4 +1,4 @@
-![build workflow](https://github.com/<OWNER>/<REPOSITORY>/actions/workflows/app.yaml/badge.svg)
+![build workflow](https://github.com/MoeidHeidari/log-parser/actions/workflows/app.yaml/badge.svg)
 # MAYD Log parser
 
 # Table of Contents
