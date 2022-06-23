@@ -1,5 +1,4 @@
 ![main branch parameter](https://github.com/MoeidHeidari/log-parser/actions/workflows/app.yaml/badge.svg?branch=main)
-[![npm version](https://badge.fury.io/js/svg-labels.svg)](https://badge.fury.io/js/svg-labels)
 # MAYD Log parser
 
 # Table of Contents
