@@ -14,11 +14,11 @@ describe('tests the behavior of file helper class', () => {
   const fileHelper = new FileHelper();
   //==================================================================================================================
   it(LOG_PARSER_TEST_CASE_1.expectation.should, async () => {
-    const result = await fileHelper.parsLog(
+    const result = await fileHelper.destructLog(
       LOG_PARSER_TEST_CASE_1.data,
       LOG_PARSER_TEST_CASE_1.logLevel,
     );
-    expect(result.timestamp).toEqual(
+    expect(result.timeStamp).toEqual(
       LOG_PARSER_TEST_CASE_1.expectation.value.timestamp,
     );
     expect(result.logLevel).toEqual(
@@ -32,7 +32,7 @@ describe('tests the behavior of file helper class', () => {
   //..................................................................................................................
   it(LOG_PARSER_TEST_CASE_2.expectation.should, async () => {
     try {
-      await fileHelper.parsLog(
+      await fileHelper.destructLog(
         LOG_PARSER_TEST_CASE_2.data,
         LOG_PARSER_TEST_CASE_2.logLevel,
       );
@@ -43,7 +43,7 @@ describe('tests the behavior of file helper class', () => {
   //..................................................................................................................
   it(LOG_PARSER_TEST_CASE_3.expectation.should, async () => {
     try {
-      await fileHelper.parsLog(
+      await fileHelper.destructLog(
         LOG_PARSER_TEST_CASE_3.data,
         LOG_PARSER_TEST_CASE_3.logLevel,
       );
@@ -54,7 +54,7 @@ describe('tests the behavior of file helper class', () => {
   //..................................................................................................................
   it(LOG_PARSER_TEST_CASE_4.expectation.should, async () => {
     try {
-      await fileHelper.parsLog(
+      await fileHelper.destructLog(
         LOG_PARSER_TEST_CASE_4.data,
         LOG_PARSER_TEST_CASE_4.logLevel,
       );
@@ -64,7 +64,7 @@ describe('tests the behavior of file helper class', () => {
   });
   //..................................................................................................................
   it(LOG_PARSER_TEST_CASE_5.expectation.should, async () => {
-    const result = await fileHelper.parsLog(
+    const result = await fileHelper.destructLog(
       LOG_PARSER_TEST_CASE_5.data,
       LOG_PARSER_TEST_CASE_5.logLevel,
     );
@@ -72,7 +72,7 @@ describe('tests the behavior of file helper class', () => {
   });
   //..................................................................................................................
   it(LOG_PARSER_TEST_CASE_6.expectation.should, async () => {
-    const result = await fileHelper.parsLog(
+    const result = await fileHelper.destructLog(
       LOG_PARSER_TEST_CASE_6.data,
       LOG_PARSER_TEST_CASE_6.logLevel,
     );
@@ -82,7 +82,7 @@ describe('tests the behavior of file helper class', () => {
   });
   //..................................................................................................................
   it(LOG_PARSER_TEST_CASE_7.expectation.should, async () => {
-    const result = await fileHelper.parsLog(
+    const result = await fileHelper.destructLog(
       LOG_PARSER_TEST_CASE_7.data,
       LOG_PARSER_TEST_CASE_7.logLevel,
     );
@@ -95,7 +95,7 @@ describe('tests the behavior of file helper class', () => {
   });
   //..................................................................................................................
   it(LOG_PARSER_TEST_CASE_8.expectation.should, async () => {
-    const result = await fileHelper.parsLog(
+    const result = await fileHelper.destructLog(
       LOG_PARSER_TEST_CASE_8.data,
       LOG_PARSER_TEST_CASE_8.logLevel,
     );
@@ -107,8 +107,4 @@ describe('tests the behavior of file helper class', () => {
     );
     expect(result.err).toEqual(LOG_PARSER_TEST_CASE_8.expectation.value.err);
   });
-  //..................................................................................................................
-  //..................................................................................................................
-  //..................................................................................................................
-  //..................................................................................................................
 });

@@ -25,12 +25,7 @@ export class ParserService {
   async parse(command: ParserCommandDTO): Promise<any> {
     return new Promise(async (resolve, reject) => {
       try {
-        (
-          await this.file_helper.readLogFile<LogModel>(
-            command.input,
-            command.logLevel,
-          )
-        )
+        (await this.file_helper.readLogFile(command.input, command.logLevel))
           .pipe(take(1))
           .subscribe(async (data: any) => {
             await this.file_helper.writeLogFile(command.output, data);

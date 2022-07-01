@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+import { LogModel } from 'src/parser/model';
 import { ParserCommandDTO } from '../../src/parser/dtos/parser-command-dto';
 import { FileHelper } from '../../src/parser/helper';
 import { ParserService } from '../../src/parser/service/parser.service';
@@ -15,7 +16,7 @@ import {
 } from './factories';
 
 describe('tests the behavior of parser service class', () => {
-  const fileHelper = new FileHelper();
+  const fileHelper = new FileHelper<LogModel>();
   const service = new ParserService(fileHelper);
   //==================================================================================================================
   it(PARSER_INPUT_TEST_CASE_1.expectation.should, async () => {
