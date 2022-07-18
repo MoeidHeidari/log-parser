@@ -53,7 +53,6 @@ Options:
 
 ## Code architecture
 
-Onion Architecture
 
 ```bash
 src
