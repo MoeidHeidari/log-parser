@@ -1,5 +1,5 @@
 ![main branch parameter](https://github.com/MoeidHeidari/log-parser/actions/workflows/app.yaml/badge.svg?branch=main)
-# MAYD Log parser
+# Log parser
 
 # Table of Contents
 
